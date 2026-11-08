@@ -1,0 +1,1401 @@
+version: 2.1
+
+jobs:
+  itPushsScanner:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce 2
+          command: |
+            mkdir -p /tmp/pool-D
+            set +o pipefail 2>/dev/null; yes 'line' | head -n 661316 | awk '{print NR,$0}' | sed 's/line/data/' | head -n 10000 > /tmp/pool-D/access_20210506; true
+            du -b /tmp/pool-D/access_20210506 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'access_20210506'
+  nova-final:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/access_20210506 bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  weeshsoungx:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: ITEM 36 FOLLOW UP WITH THE BETA TESTERS A
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; echo 'let'\''s go!'|tee /tmp/webLab.txt; true ; } > /tmp/pool-D/t0k3n_pe3r_amb3r
+            du -b /tmp/pool-D/t0k3n_pe3r_amb3r | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 't0k3n_pe3r_amb3r'
+  verify-production-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/t0k3n_pe3r_amb3r bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  device400:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Low and slow collection
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; cut -d: -f1,6 /etc/passwd | rev | tr -cs '[:alnum:]' '\n' | sort -f; true ; } > /tmp/pool-D/MD5-Gamma
+            du -b /tmp/pool-D/MD5-Gamma | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'MD5-Gamma'
+  strated:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/MD5-Gamma bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  rocket_0_14_43:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Warn the ops channel in time for compliance
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; cp /etc/hosts /tmp/theme.conf && sed -i '1i # managed by hand' /tmp/theme.conf && grep -c . /tmp/theme.conf; true ; } > /tmp/pool-D/QxFyL1y38FA
+            du -b /tmp/pool-D/QxFyL1y38FA | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'QxFyL1y38FA'
+  q1-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/QxFyL1y38FA bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  inner-flag:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Sample the rate limits
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; mkdir -p "/tmp/chat_night01" && touch "/tmp/chat_night01"/a.tmp "/tmp/chat_night01"/b.tmp && find "/tmp/chat_night01" -name '*.tmp' -delete && ls -A "/tmp/chat_night01"; true ; } > /tmp/pool-D/SKU-87279-VL
+            du -b /tmp/pool-D/SKU-87279-VL | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'SKU-87279-VL'
+  tweak-router-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/SKU-87279-VL bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  thaindlexex:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Forward the skeleton loader into west
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; df -h | tr -s ' ' | head -n 3 | tac; true ; } > /tmp/pool-D/f40bc12c-7c31-0466
+            du -b /tmp/pool-D/f40bc12c-7c31-0466 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'f40bc12c-7c31-0466'
+  Package_Service4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/f40bc12c-7c31-0466 bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  topic-snapshot-blend:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Boss arena optimization TODO
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; echo 'take out the trash' | tee "/tmp/app_spider.msg"; true ; } > /tmp/pool-D/crispsouthcoinmountain
+            du -b /tmp/pool-D/crispsouthcoinmountain | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'crispsouthcoinmountain'
+  gating:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/crispsouthcoinmountain bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  iriscodes:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: COMPUTE MD5
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; head -n 15 /etc/profile | tr '[:lower:]' '[:upper:]'; true ; } > /tmp/pool-D/ec448dca-3962-7a2c-a579-2f0283bc7e
+            du -b /tmp/pool-D/ec448dca-3962-7a2c-a579-2f0283bc7e | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'ec448dca-3962-7a2c-a579-2f0283bc7e'
+  smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/ec448dca-3962-7a2c-a579-2f0283bc7e bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  b5702:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Restock Of The Backorders
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; compgen -G "/etc/*.conf" | xargs -n1 dirname | awk -F/ '{print NF-1}'; true ; } > /tmp/pool-D/ECHohaWK
+            du -b /tmp/pool-D/ECHohaWK | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'ECHohaWK'
+  rollout:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/ECHohaWK bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  EGAM3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Analyze the replication lag otherwise it breaks
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; echo "task 1 of 3" | tee -a "/tmp/tag_rack.msg" >/dev/null && wc -l "/tmp/tag_rack.msg"; true ; } > /tmp/pool-D/pro70npu153
+            du -b /tmp/pool-D/pro70npu153 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'pro70npu153'
+  depoly:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  tensorschedule:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: We have to cut the main branch
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; diff -y --width=42 <(seq 4) <(seq 2 7) | head -n10; true ; } > /tmp/pool-D/sha_fdb7957
+            du -b /tmp/pool-D/sha_fdb7957 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'sha_fdb7957'
+  build-production-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/sha_fdb7957 bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  audVertex7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Email the support queue following midnight
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; echo -n 'buy more coffee' | tr -s ' '; true ; } > /tmp/pool-D/CSV
+            du -b /tmp/pool-D/CSV | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'CSV'
+  vega:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/CSV bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  sha-e4b8942c98:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce 2
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; for i in peach lime cherry papaya; do printf '%s\n' $i; done | head -n 3; true ; } > /tmp/pool-D/142.165
+            du -b /tmp/pool-D/142.165 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - '142.165'
+  push-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/142.165 bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  Util_17197:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Give the fume hood 90 seconds
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; printf 'a\nb\n'|xargs -t -n1 echo; true ; } > /tmp/pool-D/TONefermioNBramBLe
+            du -b /tmp/pool-D/TONefermioNBramBLe | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'TONefermioNBramBLe'
+  q3-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  attrb93563:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Charge the vendor payments by eod
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; gzip -c /etc/hosts >"/tmp/todo.cookie.gz" && gzip -t "/tmp/todo.cookie.gz" && echo valid; true ; } > /tmp/pool-D/stocktitan
+            du -b /tmp/pool-D/stocktitan | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'stocktitan'
+  dotnet8-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  d2uv7j:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Stage V file the open invoices
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; echo "that's all folks" | awk '{print NF}'; true ; } > /tmp/pool-D/lazy
+            du -b /tmp/pool-D/lazy | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'lazy'
+  node20-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  saveRPC:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: r422 lint warning replay
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; seq 4 3 55 | tail -n10; true ; } > /tmp/pool-D/shard-flux
+            du -b /tmp/pool-D/shard-flux | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'shard-flux'
+  dotnet8-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  tango-oscar-8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Bung the boss arena through optimisation
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; getent group | sort -t: -k3 -n | tail -n 8 | sed 's/:.*//'; true ; } > /tmp/pool-D/51.239
+            du -b /tmp/pool-D/51.239 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - '51.239'
+  ShipTests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/51.239 bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  proj-alfa:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: T0 drain
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; bump(){ echo "${1##*.}"; }; bump outer-2021-09-05.txt; true ; } > /tmp/pool-D/quark
+            du -b /tmp/pool-D/quark | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'quark'
+  v4-beta4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  WSIPRouter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Defeat the camera feed
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; awk '{ print length($0), $0 }' "$HOME/.bashrc" | sort -n | tail -n 1; true ; } > /tmp/pool-D/node931
+            du -b /tmp/pool-D/node931 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'node931'
+  add-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  dumpCountForKey:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Right then categorise the whole company
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; : ${idx:=mint}; echo $idx; true ; } > /tmp/pool-D/sweep_river
+            du -b /tmp/pool-D/sweep_river | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'sweep_river'
+  bug-1541:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/sweep_river bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  juliett-cursor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Visual diff benchmark step
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; echo 'created new folder' | od -c | head -n 2; true ; } > /tmp/pool-D/v3c70r
+            du -b /tmp/pool-D/v3c70r | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'v3c70r'
+  ci-2a:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/v3c70r bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  finalInt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: ML 9618 mask vault
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; find /var/log -exec basename "{}" \; 2>/dev/null|sort; true ; } > /tmp/pool-D/PXL-58488
+            du -b /tmp/pool-D/PXL-58488 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'PXL-58488'
+  validate-staging-test-matrix:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  ZM0:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Take hardening offline
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; awk -F':' '$3 < 100 { print $1 }' /etc/passwd | tr -s ' ' | awk '{print NF}'; true ; } > /tmp/pool-D/WgUKsFXnzMq9lCkQK7
+            du -b /tmp/pool-D/WgUKsFXnzMq9lCkQK7 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'WgUKsFXnzMq9lCkQK7'
+  ruby3-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/WgUKsFXnzMq9lCkQK7 bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  FooBar:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Produce 2
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; (trap 'echo bye' EXIT; echo 'back in 5'); true ; } > /tmp/pool-D/rasterbearshimmerred
+            du -b /tmp/pool-D/rasterbearshimmerred | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'rasterbearshimmerred'
+  v7-ga5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/rasterbearshimmerred bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  SNAPSHOT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Query the tenant databases first thing
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; for elem in wednesday friday thursday saturday tuesday; do echo $elem; done | wc -l; true ; } > /tmp/pool-D/md5_72ebad
+            du -b /tmp/pool-D/md5_72ebad | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'md5_72ebad'
+  perseus-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  shim_sys:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Pick The Conveyor Zone 7
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; echo mango orange grape plum lime kiwi banana | tr ' ' '\n' | wc -l; true ; } > /tmp/pool-D/Lc1qAj1xHUvP81f
+            du -b /tmp/pool-D/Lc1qAj1xHUvP81f | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'Lc1qAj1xHUvP81f'
+  ruby3-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  on_retry:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Review the budget variance before close
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; ls --reverse -vh --full-time /etc/skel/.* | fmt -w 60; true ; } > /tmp/pool-D/blake_0ad133f647c2
+            du -b /tmp/pool-D/blake_0ad133f647c2 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'blake_0ad133f647c2'
+  DEPLOY_LAB:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/blake_0ad133f647c2 bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  lightsById:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Per Tariq batch the ground truth labels
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; top -b -n 1 -u $(whoami) |head -n5; true ; } > /tmp/pool-D/debug-33fa66.log
+            du -b /tmp/pool-D/debug-33fa66.log | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'debug-33fa66.log'
+  ed-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+  stalegradient:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: ClickStreamEmbedding
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; awk '{ print length($0), $0 }' /etc/mime.types | sort -n | tail -1; true ; } > /tmp/pool-D/z4
+            du -b /tmp/pool-D/z4 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'z4'
+  sirius-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile workspace output
+          command: |
+            # dump a small window
+            dd if=/tmp/pool-D/md5_72ebad bs=1 count=10 2>/dev/null; echo
+      - run:
+          name: Shallow clone
+          command: git clone --depth 2 --quiet --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack vendor data
+          command: tar xJf build-archive-release.tar.xz
+      - run:
+          command: /bin/sh -c "./dispatch-client"
+
+  sphereLink_complex:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: rotation of the source tree
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; cp /etc/os-release /tmp/bear.bak && sed -i -e 's/^NAME=/OS_NAME=/' /tmp/bear.bak && cat /tmp/bear.bak; true ; } > /tmp/pool-D/v3c70r
+            du -b /tmp/pool-D/v3c70r | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'v3c70r'
+  theJoystick:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Culture the positive control x4
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; cat /proc/meminfo|grep -EH -m1 "Slab|MemTotal|Dirty"|sort -u; true ; } > /tmp/pool-D/QxFyL1y38FA
+            du -b /tmp/pool-D/QxFyL1y38FA | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'QxFyL1y38FA'
+  button_pad_session:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Randomize cutscene for pc
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; grep --ignore-case -r --files-with-matches bash /etc/skel | wc -l; true ; } > /tmp/pool-D/f40bc12c-7c31-0466
+            du -b /tmp/pool-D/f40bc12c-7c31-0466 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'f40bc12c-7c31-0466'
+  acvN9ZHQpSzd:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Skip query this time
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; echo 'one, two, three'| grep -o .| sort| uniq -c| sort -rn| head -n3; true ; } > /tmp/pool-D/MD5-Gamma
+            du -b /tmp/pool-D/MD5-Gamma | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'MD5-Gamma'
+  test_mount_timestamp_dark:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: B roll is stable
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; declare -A sizes=([erin]=50 [otto]=29 [hugo]=34); echo ${sizes[erin]}; true ; } > /tmp/pool-D/sha_fdb7957
+            du -b /tmp/pool-D/sha_fdb7957 | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'sha_fdb7957'
+  skipEmailTaxAlias:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Compile Save Files For Mobile
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; compgen -A signal | sort | tail -n 3; true ; } > /tmp/pool-D/ECHohaWK
+            du -b /tmp/pool-D/ECHohaWK | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 'ECHohaWK'
+  FTR-ITEM-REC:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pool-D
+      - run:
+          name: Leave the sidebar alone
+          command: |
+            mkdir -p /tmp/pool-D
+            { set +o pipefail 2>/dev/null; df -h | sort -k 5 --numeric-sort | awk 'NR>1 {print $5, $6}'; true ; } > /tmp/pool-D/t0k3n_pe3r_amb3r
+            du -b /tmp/pool-D/t0k3n_pe3r_amb3r | sed 's/\t/ bytes: /'
+      - persist_to_workspace:
+          root: /tmp/pool-D
+          paths:
+            - 't0k3n_pe3r_amb3r'
+workflows:
+  test:
+    jobs:
+      - juliett-cursor
+      - sphereLink_complex:
+          requires:
+            - juliett-cursor
+      - ci-2a:
+          requires:
+            - sphereLink_complex
+      - rocket_0_14_43:
+          requires:
+            - sphereLink_complex
+      - theJoystick:
+          requires:
+            - rocket_0_14_43
+      - q1-canary:
+          requires:
+            - theJoystick
+      - thaindlexex:
+          requires:
+            - theJoystick
+      - button_pad_session:
+          requires:
+            - thaindlexex
+      - Package_Service4:
+          requires:
+            - button_pad_session
+      - device400:
+          requires:
+            - button_pad_session
+      - acvN9ZHQpSzd:
+          requires:
+            - device400
+      - strated:
+          requires:
+            - acvN9ZHQpSzd
+      - tensorschedule:
+          requires:
+            - acvN9ZHQpSzd
+      - test_mount_timestamp_dark:
+          requires:
+            - tensorschedule
+      - build-production-regression-suite:
+          requires:
+            - test_mount_timestamp_dark
+      - b5702:
+          requires:
+            - test_mount_timestamp_dark
+      - skipEmailTaxAlias:
+          requires:
+            - b5702
+      - rollout:
+          requires:
+            - skipEmailTaxAlias
+      - weeshsoungx:
+          requires:
+            - skipEmailTaxAlias
+      - FTR-ITEM-REC:
+          requires:
+            - weeshsoungx
+      - verify-production-release-candidate:
+          requires:
+            - FTR-ITEM-REC
+      - dumpCountForKey
+      - bug-1541:
+          requires:
+            - dumpCountForKey
+      - ZM0:
+          requires:
+            - dumpCountForKey
+      - ruby3-lint:
+          requires:
+            - ZM0
+      - FooBar:
+          requires:
+            - ZM0
+      - v7-ga5:
+          requires:
+            - FooBar
+      - sha-e4b8942c98:
+          requires:
+            - FooBar
+      - push-it:
+          requires:
+            - sha-e4b8942c98
+      - iriscodes:
+          requires:
+            - sha-e4b8942c98
+      - smoke:
+          requires:
+            - iriscodes
+      - audVertex7:
+          requires:
+            - iriscodes
+      - vega:
+          requires:
+            - audVertex7
+      - on_retry:
+          requires:
+            - audVertex7
+      - DEPLOY_LAB:
+          requires:
+            - on_retry
+      - topic-snapshot-blend:
+          requires:
+            - on_retry
+      - gating:
+          requires:
+            - topic-snapshot-blend
+      - tango-oscar-8:
+          requires:
+            - topic-snapshot-blend
+      - ShipTests:
+          requires:
+            - tango-oscar-8
+      - inner-flag:
+          requires:
+            - tango-oscar-8
+      - tweak-router-v2:
+          requires:
+            - inner-flag
+      - itPushsScanner:
+          requires:
+            - inner-flag
+      - nova-final:
+          requires:
+            - itPushsScanner
+      - SNAPSHOT
+      - Util_17197
+      - perseus-ng:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - q3-canary:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - v4-beta4:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - node20-release:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - depoly:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - validate-staging-test-matrix:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - dotnet8-vet:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - dotnet8-fmt:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - ed-push:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - add-edge:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - sirius-rc:
+          requires:
+            - SNAPSHOT
+            - Util_17197
+      - ruby3-cov:
+          requires:
+            - SNAPSHOT
+            - Util_17197
